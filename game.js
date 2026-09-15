@@ -20,7 +20,7 @@ const abbrevName=n=>{const p=String(n||"").trim().split(/\s+/);return p.length<2
 
 /* ---------- Config por defecto ---------- */
 const DEFAULT_CONFIG={
-  version:"1.0", qbankVersion:"2",
+  version:"1.0", qbankVersion:"3",
   event:{name:"Congreso Médico", startDate:"", endDate:""},
   attractTitle:"Desafío en Movimiento",
   tagline:"Poné a prueba tus reflejos y tu conocimiento",
@@ -36,30 +36,30 @@ const DEFAULT_CONFIG={
     l3_time:20, l3_ok:100, l3_bad:50, l3_streak:100
   },
   questions:[
-    // ---- TIRZEPATIDA (Gluconex) ----
-    {id:"q001",active:true,question:"La tirzepatida actúa como agonista de los receptores de:",
+    // ---- GLUCONEX (tirzepatida) — estudio SURMOUNT-OA (osteoartritis de rodilla) ----
+    {id:"q001",active:true,question:"El estudio SURMOUNT-OA evaluó a Gluconex (tirzepatida) en pacientes con:",
+     options:["Osteoartritis de rodilla y obesidad","Solo diabetes tipo 1","Fractura de cadera","Hipertensión aislada"],correctIndex:0,
+     explanation:"SURMOUNT-OA evaluó tirzepatida en osteoartritis de rodilla asociada a obesidad.",brand:"Gluconex"},
+    {id:"q002",active:true,question:"En SURMOUNT-OA, Gluconex (tirzepatida) mostró, respecto al dolor de rodilla:",
+     options:["Sin cambios","Reducción del dolor vs placebo","Aumento del dolor","Solo efecto estético"],correctIndex:1,
+     explanation:"En SURMOUNT-OA la tirzepatida se asoció a reducción del dolor de rodilla frente a placebo.",brand:"Gluconex"},
+    {id:"q003",active:true,question:"Gluconex (tirzepatida) actúa como agonista de los receptores de:",
      options:["Solo GLP-1","GIP y GLP-1 (doble incretina)","Solo GIP","SGLT2"],correctIndex:1,
      explanation:"La tirzepatida es un agonista dual de los receptores GIP y GLP-1.",brand:"Gluconex"},
-    {id:"q002",active:true,question:"Además del control glucémico, la tirzepatida se asocia clínicamente con:",
+    {id:"q004",active:true,question:"Además del control glucémico, Gluconex (tirzepatida) se asocia con:",
      options:["Aumento de peso","Reducción del peso corporal","Sin efecto sobre el peso","Retención de líquidos"],correctIndex:1,
-     explanation:"La tirzepatida se asocia a reducción significativa del peso corporal.",brand:"Gluconex"},
-    {id:"q003",active:true,question:"La vía de administración habitual de la tirzepatida es:",
-     options:["Oral diaria","Subcutánea semanal","Intravenosa","Inhalatoria"],correctIndex:1,
-     explanation:"La tirzepatida se administra por vía subcutánea una vez por semana.",brand:"Gluconex"},
-    {id:"q004",active:true,question:"El mecanismo incretínico de la tirzepatida favorece principalmente:",
-     options:["Secreción de insulina dependiente de glucosa","Glucogenólisis","Lipólisis descontrolada","Vasoconstricción"],correctIndex:0,
-     explanation:"Las incretinas potencian la secreción de insulina dependiente de glucosa.",brand:"Gluconex"},
-    // ---- ETORICOXIB (Oxus) ----
-    {id:"q005",active:true,question:"El etoricoxib pertenece al grupo de los:",
+     explanation:"La tirzepatida se asocia a reducción significativa del peso corporal, relevante en la osteoartritis por sobrecarga.",brand:"Gluconex"},
+    // ---- OXUS (etoricoxib) ----
+    {id:"q005",active:true,question:"Oxus (etoricoxib) pertenece al grupo de los:",
      options:["Opioides","Inhibidores selectivos de la COX-2","Corticoides","Relajantes musculares"],correctIndex:1,
      explanation:"El etoricoxib es un AINE inhibidor selectivo de la COX-2.",brand:"Oxus"},
-    {id:"q006",active:true,question:"Una ventaja atribuida a la selectividad COX-2 del etoricoxib es:",
+    {id:"q006",active:true,question:"Una ventaja atribuida a la selectividad COX-2 de Oxus (etoricoxib) es:",
      options:["Mayor sangrado","Menor lesividad gástrica relativa vs AINEs no selectivos","Efecto sedante","Acción antibiótica"],correctIndex:1,
      explanation:"La selectividad COX-2 se asocia a menor lesividad gastrointestinal relativa.",brand:"Oxus"},
-    {id:"q007",active:true,question:"El etoricoxib se utiliza habitualmente para el manejo de:",
+    {id:"q007",active:true,question:"Oxus (etoricoxib) se utiliza habitualmente para el manejo de:",
      options:["Infecciones","Dolor e inflamación (p. ej. artrosis, artritis)","Hipertensión","Diabetes"],correctIndex:1,
      explanation:"El etoricoxib se emplea en dolor e inflamación como artrosis y artritis.",brand:"Oxus"},
-    {id:"q008",active:true,question:"El etoricoxib está disponible en presentaciones de:",
+    {id:"q008",active:true,question:"Oxus (etoricoxib) está disponible en presentaciones de:",
      options:["60-90-120 mg","5-10 mg","500 mg","1-2 g"],correctIndex:0,
      explanation:"El etoricoxib se presenta en dosis de 60, 90 y 120 mg según indicación.",brand:"Oxus"}
   ],
@@ -194,13 +194,8 @@ function stopTimer(){cancelAnimationFrame(rafId);$("#timebar").style.display="no
 
 /* ---------- Franja de marca ---------- */
 function setBrandBar(brand){
+  // Franja de marca lateral desactivada por pedido: no se muestra nada al costado.
   const host=$("#brandbarHost");host.innerHTML="";
-  if(!brand){return;}
-  const logo=CONFIG.brandLogos[brand];
-  const bb=el("div","brandbar");
-  if(logo) bb.appendChild(el("img")).src=logo;
-  else bb.appendChild(el("div","bname",esc(brand)));
-  host.appendChild(bb);
 }
 function clearBrandBar(){$("#brandbarHost").innerHTML="";}
 
