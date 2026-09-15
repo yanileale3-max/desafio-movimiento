@@ -1,0 +1,10 @@
+{
+  "name": "Desafío en Movimiento",
+  "short_name": "Desafío",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#0b1f33",
+  "theme_color": "#0b1f33",
+  "start_url": "./index.html",
+  "icons": []
+}
