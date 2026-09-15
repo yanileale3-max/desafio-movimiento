@@ -20,7 +20,7 @@ const abbrevName=n=>{const p=String(n||"").trim().split(/\s+/);return p.length<2
 
 /* ---------- Config por defecto ---------- */
 const DEFAULT_CONFIG={
-  version:"1.0", qbankVersion:"1",
+  version:"1.0", qbankVersion:"2",
   event:{name:"Congreso Médico", startDate:"", endDate:""},
   attractTitle:"Desafío en Movimiento",
   tagline:"Poné a prueba tus reflejos y tu conocimiento",
@@ -36,35 +36,46 @@ const DEFAULT_CONFIG={
     l3_time:20, l3_ok:100, l3_bad:50, l3_streak:100
   },
   questions:[
-    {id:"q001",active:true,question:"En el manejo del dolor musculoesquelético agudo leve, ¿qué grupo suele considerarse de primera línea?",
-     options:["Opioides","AINEs / analgésicos según indicación","Corticoides sistémicos","Relajantes de por vida"],correctIndex:1,
-     explanation:"Los analgésicos/AINEs según indicación suelen ser primera línea en dolor leve, con evaluación individual.",brand:"Oxus"},
-    {id:"q002",active:true,question:"La actividad física regular en pacientes con osteoartritis de rodilla se asocia con:",
-     options:["Empeoramiento inevitable","Mejora del dolor y la función","Sin efecto","Contraindicación absoluta"],correctIndex:1,
-     explanation:"El ejercicio adecuado mejora dolor y función en osteoartritis de rodilla.",brand:"Oxus"},
-    {id:"q003",active:true,question:"El calcio y la vitamina D son relevantes principalmente para la salud:",
-     options:["Ósea","Ocular","Auditiva","Dental exclusivamente"],correctIndex:0,
-     explanation:"Calcio y vitamina D son claves para la salud ósea.",brand:"Ostex"},
-    {id:"q004",active:true,question:"Ante lumbalgia inespecífica aguda, la recomendación general sobre el reposo es:",
-     options:["Reposo estricto prolongado","Mantener actividad según tolerancia","Inmovilización total 2 semanas","Evitar toda movilidad"],correctIndex:1,
-     explanation:"Se recomienda mantener actividad según tolerancia; el reposo prolongado no es aconsejable.",brand:"Oxus"},
-    {id:"q005",active:true,question:"Un objetivo del abordaje integral del dolor crónico es:",
-     options:["Solo farmacológico","Multimodal (físico, educativo y farmacológico)","Únicamente reposo","Evitar rehabilitación"],correctIndex:1,
-     explanation:"El abordaje multimodal es el enfoque recomendado en dolor crónico.",brand:"Oxus"}
+    // ---- TIRZEPATIDA (Gluconex) ----
+    {id:"q001",active:true,question:"La tirzepatida actúa como agonista de los receptores de:",
+     options:["Solo GLP-1","GIP y GLP-1 (doble incretina)","Solo GIP","SGLT2"],correctIndex:1,
+     explanation:"La tirzepatida es un agonista dual de los receptores GIP y GLP-1.",brand:"Gluconex"},
+    {id:"q002",active:true,question:"Además del control glucémico, la tirzepatida se asocia clínicamente con:",
+     options:["Aumento de peso","Reducción del peso corporal","Sin efecto sobre el peso","Retención de líquidos"],correctIndex:1,
+     explanation:"La tirzepatida se asocia a reducción significativa del peso corporal.",brand:"Gluconex"},
+    {id:"q003",active:true,question:"La vía de administración habitual de la tirzepatida es:",
+     options:["Oral diaria","Subcutánea semanal","Intravenosa","Inhalatoria"],correctIndex:1,
+     explanation:"La tirzepatida se administra por vía subcutánea una vez por semana.",brand:"Gluconex"},
+    {id:"q004",active:true,question:"El mecanismo incretínico de la tirzepatida favorece principalmente:",
+     options:["Secreción de insulina dependiente de glucosa","Glucogenólisis","Lipólisis descontrolada","Vasoconstricción"],correctIndex:0,
+     explanation:"Las incretinas potencian la secreción de insulina dependiente de glucosa.",brand:"Gluconex"},
+    // ---- ETORICOXIB (Oxus) ----
+    {id:"q005",active:true,question:"El etoricoxib pertenece al grupo de los:",
+     options:["Opioides","Inhibidores selectivos de la COX-2","Corticoides","Relajantes musculares"],correctIndex:1,
+     explanation:"El etoricoxib es un AINE inhibidor selectivo de la COX-2.",brand:"Oxus"},
+    {id:"q006",active:true,question:"Una ventaja atribuida a la selectividad COX-2 del etoricoxib es:",
+     options:["Mayor sangrado","Menor lesividad gástrica relativa vs AINEs no selectivos","Efecto sedante","Acción antibiótica"],correctIndex:1,
+     explanation:"La selectividad COX-2 se asocia a menor lesividad gastrointestinal relativa.",brand:"Oxus"},
+    {id:"q007",active:true,question:"El etoricoxib se utiliza habitualmente para el manejo de:",
+     options:["Infecciones","Dolor e inflamación (p. ej. artrosis, artritis)","Hipertensión","Diabetes"],correctIndex:1,
+     explanation:"El etoricoxib se emplea en dolor e inflamación como artrosis y artritis.",brand:"Oxus"},
+    {id:"q008",active:true,question:"El etoricoxib está disponible en presentaciones de:",
+     options:["60-90-120 mg","5-10 mg","500 mg","1-2 g"],correctIndex:0,
+     explanation:"El etoricoxib se presenta en dosis de 60, 90 y 120 mg según indicación.",brand:"Oxus"}
   ],
   level3:{
-    correct:["Movilidad","Fuerza","Flexibilidad","Equilibrio","Postura","Constancia","Rehabilitación","Prevención"],
-    distractors:["Sedentarismo","Sobrecarga","Reposo excesivo","Mala postura","Automedicación"]
+    correct:["Control glucémico","Manejo del dolor","Movilidad","Adherencia","Bienestar","Calidad de vida","Constancia","Prevención"],
+    distractors:["Sedentarismo","Automedicación","Dolor sin control","Abandono del tratamiento"]
   },
-  levelBrands:{l1:"Oxus", l2:"", l3:"Ostex"},
+  levelBrands:{l1:"Oxus", l2:"", l3:"Gluconex"},
   brandReviews:{
-    Oxus:"Oxus acompaña el manejo del dolor musculoesquelético.",
-    Ostex:"Ostex, soporte para la salud ósea y articular."
+    Gluconex:"Gluconex · tirzepatida",
+    Oxus:"Oxus · etoricoxib"
   },
-  brandLogos:{},        // { marca: dataURI }
+  brandLogos:{},        // { marca: dataURI } — se cargan abajo en init
   prodLogos:[],         // [dataURI] logos de producto pantalla final
   instLogo:"",          // logo institucional (dataURI)
-  whatsapp:{enabled:true, countryCode:"595", label:"Enviar mi resultado por WhatsApp"}
+  whatsapp:{enabled:true, countryCode:"595", label:"Recibir mi resultado por WhatsApp"}
 };
 
 /* ---------- Estado en memoria ---------- */
@@ -453,11 +464,22 @@ function buildWhatsApp(rec){
   const tel=String(rec.contacto||"").replace(/\D/g,"");
   if(tel.length<6) return;
   const num=(w.countryCode||"")+tel.replace(/^0+/,"");
-  const revs=pickReviews(game.brandsSeen);
-  const msg=`¡Jugué el Desafío en Movimiento!%0A`+
-    `${encodeURIComponent(rec.nombre)} — ${encodeURIComponent(rec.category)}%0A`+
-    `Puntaje: ${rec.total} pts%0A`+
-    (revs.length?`%0A${encodeURIComponent(revs.join("  •  "))}`:"");
+  const parts=String(rec.nombre||"").trim().split(/\s+/).filter(Boolean);
+  const titles=/^(dr|dra|dr\.|dra\.|lic|lic\.|prof|prof\.)$/i;
+  const nombre1=(parts.find(p=>!titles.test(p))||parts[0]||rec.nombre);
+  // Mensaje Opción B — elegante y breve
+  const lines=[
+    `🎉 ¡Lo lograste, ${nombre1}!`,
+    ``,
+    `Completaste el *Desafío en Movimiento* con *${rec.total} pts*`,
+    `y alcanzaste el nivel *${rec.category}*. ¡Impecable!`,
+    ``,
+    `Ciencia que acompaña cada movimiento:`,
+    `Gluconex · tirzepatida   |   Oxus · etoricoxib`,
+    ``,
+    `Gracias por jugar 💙 Laboratorios Lasca`
+  ];
+  const msg=encodeURIComponent(lines.join("\n"));
   const a=el("a","wa-btn");a.href=`https://wa.me/${num}?text=${msg}`;a.target="_blank";
   a.innerHTML="✆ "+esc(w.label||"Enviar por WhatsApp");
   host.appendChild(a);
@@ -798,6 +820,17 @@ async function init(){
       await DB.kvSet("config",CONFIG);
     }
   }else{ await DB.kvSet("config",CONFIG); }
+
+  // Logos por defecto (embebidos en logos.js). Se aplican siempre desde el archivo,
+  // salvo que el usuario los haya reemplazado manualmente (flag userLogos).
+  if(window.DEFAULT_LOGOS && !CONFIG.userLogos){
+    const L=window.DEFAULT_LOGOS;
+    CONFIG.brandLogos=CONFIG.brandLogos||{};
+    CONFIG.brandLogos.Gluconex=L.gluconex;
+    CONFIG.brandLogos.Oxus=L.oxus;
+    CONFIG.instLogo=L.lasca;
+    CONFIG.prodLogos=[L.gluconex,L.oxus];
+  }
 
   applyTexts(); wire();
 

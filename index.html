@@ -64,10 +64,10 @@
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
   .brands-row{display:flex;align-items:center;justify-content:center;gap:16px;
     margin-top:40px;flex-wrap:wrap;position:fixed;bottom:24px;left:0;right:0}
-  .brands-row .prod{background:#fff;padding:7px 16px;border-radius:10px;
-    box-shadow:0 6px 16px rgba(0,0,0,.25);display:inline-flex;align-items:center}
-  .brands-row .prod img{height:22px;width:auto;display:block}
-  .brands-row .wl img{height:20px;opacity:.9}
+  .brands-row .prod{display:inline-flex;align-items:center;padding:4px 10px}
+  .brands-row .prod img{height:26px;width:auto;display:block;opacity:.95}
+  .brands-row .wl img{height:30px;opacity:.9}
+  .brands-row .sep{width:1px;height:26px;background:var(--line)}
 
   /* Countdown */
   .countdown{font-family:'Georgia',serif;font-size:9rem;font-weight:700;color:var(--gold);
@@ -352,6 +352,7 @@
 </section>
 
 <script type="module" src="firebase-init.js"></script>
+<script src="logos.js"></script>
 <script src="game.js"></script>
 </body>
 </html>
